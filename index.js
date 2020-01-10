@@ -15,8 +15,7 @@ class Juego {
   constructor() {
     this.inicializar();
     this.generarSecuencia();
-    this.siguienteNivel();
-    
+    this.siguienteNivel(); 
   }
 
   // Esta funcion oculta la ventana de "Iniciar juego" al dar click
@@ -46,8 +45,8 @@ class Juego {
   }
 
   // Se transforma un numero a un color
-  transformarNumeroAColor(){
-    switch (Number){
+  transformarNumeroAColor(numero){
+    switch (numero){
       case 0:
         return 'celeste'
       case 1:
@@ -63,7 +62,6 @@ class Juego {
     for (var i = 0; i < this.nivel; i++){
       let color = this.transformarNumeroAColor(this.secuencia[i])
       setTimeout(() => this.iluminarColor(color), 1000 * i)
-      
     }
   }
 
