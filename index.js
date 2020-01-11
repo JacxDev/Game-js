@@ -20,6 +20,7 @@ class Juego {
 
   // Esta funcion oculta la ventana de "Iniciar juego" al dar click
   inicializar() {
+    this.elegirColor = this.elegirColor.bind(this)
     btnEmpezar.classList.add('hide');
 
     //  Nivel inicial
@@ -42,6 +43,7 @@ class Juego {
 
   siguienteNivel(){
     this.iluminarSecuencia()
+    this.agregarEventosClick()
   }
 
   // Se transforma un numero a un color
@@ -58,12 +60,17 @@ class Juego {
     }
   }
 
+  // Se crea la secuencia de iluminacion con un ciclo for
+  // por cada nivel se iluminara el mismo numero de veces
   iluminarSecuencia(){
-    for (var i = 0; i < this.nivel; i++){
-      let color = this.transformarNumeroAColor(this.secuencia[i])
+    for (let i = 0; i < this.nivel; i++){
+      const color = this.transformarNumeroAColor(this.secuencia[i])
+      // Un tiempo de espera por cada iluminacion de 1seg
+      // Para evitar que se iluminen todos en el mismo momento
       setTimeout(() => this.iluminarColor(color), 1000 * i)
     }
   }
+
 
   iluminarColor(color){
     this.colores[color].classList.add('light')
@@ -73,6 +80,18 @@ class Juego {
   apagarColor(color) {
     this.colores[color].classList.remove('light')
   }
+
+  agregarEventosClick(){
+    // Metodo bind, ata a un metodo a su objeto para hacer referencia a su this
+    this.colores.celeste.addEventListener('click', this.elegirColor)
+    this.colores.verde.addEventListener('click', this.elegirColor)
+    this.colores.violeta.addEventListener('click', this.elegirColor)
+    this.colores.naranja.addEventListener('click', this.elegirColor)
+  }
+
+  elegirColor(ev){
+    console.log(this)
+  }
 }
 
 
@@ -81,3 +100,7 @@ function empezarJuego() {
   window.juego = new Juego()
 }
 
+setTimeout(() => console.log(1), 1000)
+     setTimeout(() => console.log(2), 300)
+     setTimeout(() => console.log(3), 0)
+     console.log(4)
